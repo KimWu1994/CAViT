@@ -1,0 +1,1 @@
+Command Line Args: Namespace(config_file='projects/FastVideo/configs/vit3/vit_base_st_cross_slow-fast.yml', dist_url='tcp://127.0.0.1:49152', eval_only=False, machine_rank=0, num_gpus=1, num_machines=1, opts=['MODEL', 'BN'], resume=False)
