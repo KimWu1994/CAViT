@@ -30,6 +30,13 @@ conda install pytorch==1.6.0 torchvision tensorboard -c pytorch
 pip install -r docs/requirements.txt
 ```
 
+- using cython for evalution
+```
+cd fastreid/evaluation/rank_cylib
+make all
+
+```
+
 
 ## Support backbone
 - swin transformer \& swin transformer 3D
