@@ -92,6 +92,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 projects/CAViT/train.py --config-file proje
 - Our residual position embedding will influence the stable of experimental results. If you want to get more stable performance, please change `CASCADE.TPE` from `flow` to `sin`,
 - PRID-2011 and iLIDS-VID are too samlle. The experimental results on these two data sets are unstable, particulary on PRID-2011. (e.g., Diffent GPUs, pytorch versions, and etc., all of them may influence the final results.)
 - If you train models with multi-gpus, please fix `HEADS.NORM: BN` to `HEADS.NORM: syncBN` in the config file. This may influence the results.
+- For MARS\_DL dataset, `NewRank-1` and `New_mAP` are the performance metric, while on other datasets, `Rank-1` ,`Rank-5`, and `mAP` are the performance metric.
 
 ## Contacts
 If you have any question about the project, please feel free to contact me.
