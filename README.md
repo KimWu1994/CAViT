@@ -4,7 +4,7 @@
 
 
 ## Preparation
-- datasets
+- Download datasets
   - MARS
   - MARS\_DL
   - LS_VID
@@ -13,11 +13,11 @@
   - vveri901
 
 - add data path
-run `export FASTREID_DATASETS=/path/to/datasets/` in the terminal,
-or,
-add `export FASTREID_DATASETS=/path/to/datasets/` to your `~/.bashrc`
+  - run `export FASTREID_DATASETS=/path/to/datasets/` in the terminal,
+  - or add `export FASTREID_DATASETS=/path/to/datasets/` to your `~/.bashrc`
 
-- install requirement
+
+- Install requirement
 ```
 conda create -n reid python=3.7
 conda activate reid
@@ -31,16 +31,13 @@ pip install -r docs/requirements.txt
 ```
 
 
-## Support backbone:
+## Support backbone
 - swin transformer \& swin transformer 3D
 - ViT \& ViT 3D (timeformer)
 - TSM
 - AP3D
 - BickNet
 - token shift
-
-
-
 
 
 ## Training
