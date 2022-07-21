@@ -122,7 +122,7 @@ CASCADE:
   PATCH3:  (16, 32)
   STRIDE3: (12, 28)
 
-  TPE: sin
+  TPE: flow
 
 
 OUTPUT_DIR: logs/marsdl
