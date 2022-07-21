@@ -12,6 +12,25 @@
   - iLIDS-VID
   - vveri901
 
+- add data path
+run `export FASTREID_DATASETS=/path/to/datasets/` in the terminal,
+or,
+add `export FASTREID_DATASETS=/path/to/datasets/` to your `~/.bashrc`
+
+- install requirement
+```
+conda create -n reid python=3.7
+conda activate reid
+conda install pytorch==1.6.0 torchvision tensorboard -c pytorch
+
+# if you use A100 gpu, please install pytorch >= 1.7 and cudatoolkit >=11.0
+# for example
+# conda install pytorch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1 cudatoolkit=11.3 -c pytorch -c conda-forge
+
+pip install -r docs/requirements.txt
+```
+
+
 ## Support backbone:
 - swin transformer \& swin transformer 3D
 - ViT \& ViT 3D (timeformer)
@@ -19,6 +38,7 @@
 - AP3D
 - BickNet
 - token shift
+
 
 
 
@@ -48,8 +68,8 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 projects/CAViT/train.py --config-file proje
 ```
 
 
-This repo also implemnt fix length sequeence testing \& flixabel length testing.
-1. Flixable testing (use all frames in the sequence for testing)
+This repo also implements the fixed length sequeence testing \& the flexible length testing.
+1. Flexible testing (use all frames in the sequence for testing)
 ```
 CUDA_VISIBLE_DEVICES=2 python3 projects/CAViT/train.py --config-file projects/CAViT/configs/cavit_prid2011.yml  --num-gpus 1  --eval-only MODEL.WEIGHTS logs/prid2011/model_best.pth TEMP.TEST.ALL True
 ```
@@ -59,7 +79,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 projects/CAViT/train.py --config-file proje
 ```
 
 
-2. Fix length testing
+2. Fixed length testing
 
 ```
 CUDA_VISIBLE_DEVICES=2 python3 projects/CAViT/train.py --config-file projects/CAViT/configs/cavit_prid2011.yml  --num-gpus 1  --eval-only MODEL.WEIGHTS logs/prid2011/model_best.pth TEMP.TEST.ALL False  TEMP.TEST.SEQ_SIZE  8   TEMP.TEST.TRACK_SPLIT 128
