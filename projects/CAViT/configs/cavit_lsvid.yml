@@ -24,7 +24,7 @@ MODEL:
 
   HEADS:
     NAME: TempHead
-    NORM: syncBN
+    NORM: BN
     WITH_BNNECK: True
     POOL_LAYER: Identity
     NECK_FEAT: before

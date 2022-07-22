@@ -95,11 +95,25 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 projects/CAViT/train.py --config-file proje
 
 
 ## Notice
-- Dropout in ViT can have an impact on the results and lead to unstable experimental results,
-- Our residual position embedding will influence the stable of experimental results. If you want to get more stable performance, please change `CASCADE.TPE` from `flow` to `sin`,
-- PRID-2011 and iLIDS-VID are too samlle. The experimental results on these two data sets are unstable, particulary on PRID-2011. (e.g., Diffent GPUs, pytorch versions, and etc., all of them may influence the final results.)
+- The experimental results on these two data sets are unstable, particulary on PRID-2011. (e.g., Dropout in ViT, Diffent GPUs, pytorch versions, and etc., all of them may influence the final results.)
 - If you train models with multi-gpus, please fix `HEADS.NORM: BN` to `HEADS.NORM: syncBN` in the config file. This may influence the results.
 - For MARS\_DL dataset, `NewRank-1` and `New_mAP` are the performance metric, while on other datasets, `Rank-1` ,`Rank-5`, and `mAP` are the performance metric.
+
+- We reproduce the experiments of our paper with 1% performance gap. The model
+
+|Dataset| R1 | R5 | mAP |
+|-------|----|----|-----|
+|MARS   |90.96|97.83|87.64|
+|iLIDS-VID|94.67| 98.67|-|
+| PRID2011  | 95.51    | 98.88    | -|
+| MARSDL    | 95.74    | 90.19|-|
+
+
+Download models
+- [onrdrive](https://stmarysstclairorg-my.sharepoint.com/:f:/g/personal/km41662_office-365_works/Er1u9h6yl_9JrhH-cBJWDPsB-EnxP9x28j6hkDxeJa_Sog?e=rwaxT7)
+- [baidu cloud](https://pan.baidu.com/s/1RgoLM0JsTRjpZLPlpPYnsw) (code 9218)
+
+
 
 ## Contacts
 If you have any question about the project, please feel free to contact me.
@@ -109,3 +123,6 @@ E-mail: jinlin.wu@nlpr.ia.ac.cn
 
 ## ACKNOWLEDGEMENTS
 The code was developed based on the ’fast-reid’ toolbox https://github.com/JDAI-CV/fast-reid.
+
+
+
