@@ -75,7 +75,7 @@ SOLVER:
     ENABLED: True
   OPT: SGD
   MAX_EPOCH: 30
-  BASE_LR: 0.02
+  BASE_LR: 0.01
   BIAS_LR_FACTOR: 2.
   WEIGHT_DECAY: 1e-4
   WEIGHT_DECAY_BIAS: 1e-4 
@@ -122,7 +122,6 @@ CASCADE:
   PATCH3:  (16, 32)
   STRIDE3: (12, 28)
 
-  TPE: sin
+  TPE: flow
 
-
-OUTPUT_DIR: logs/mars
+OUTPUT_DIR: logs/mars_flow
