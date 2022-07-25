@@ -107,6 +107,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 projects/CAViT/train.py --config-file proje
 |iLIDS-VID|94.67| 98.67|-|
 | PRID2011  | 95.51    | 98.88    | -|
 | MARSDL    | 95.74    | 90.19|-|
+|LS-VID| 89.14    | 96.03    | 79.37|
 
 
 Download models
@@ -122,7 +123,8 @@ E-mail: jinlin.wu@nlpr.ia.ac.cn
 
 
 ## ACKNOWLEDGEMENTS
-The code was developed based on the ’fast-reid’ toolbox https://github.com/JDAI-CV/fast-reid.
+- The code was developed based on the `fast-reid` toolbox https://github.com/JDAI-CV/fast-reid. 
+- Thanks for [AP3D](https://github.com/guxinqian/AP3D) of [Xinqian Gu](https://scholar.google.com/citations?user=cSHE7ZoAAAAJ) providing video reid code base. 
 
 
 

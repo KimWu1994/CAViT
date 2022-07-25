@@ -1,0 +1,126 @@
+MODEL:
+  META_ARCHITECTURE: CAViT
+  PIXEL_MEAN: [ 127.5, 127.5, 127.5 ]
+  PIXEL_STD: [ 127.5, 127.5, 127.5 ]
+
+  BACKBONE:
+    NAME: build_cavit_backbone
+    DEPTH: base
+    FEAT_DIM: 768
+    PRETRAIN: True
+    PRETRAIN_PATH: ../jx_vit_base_p16_224-80ecf9dd.pth
+    STRIDE_SIZE: (16, 16)
+    DROP_PATH_RATIO: 0.1
+    DROP_RATIO: 0.0
+    ATT_DROP_RATE: 0.0
+    SHIFT_NUM: 5
+    SHUFFLE_GROUP: 2
+    DEVIDE_LENGTH: 4
+    RE_ARRANGE: True
+    LAYER_NUM: 10
+    INFERENCE_DEPTH: 10
+    NORM_OUT: True
+
+
+  HEADS:
+    NAME: TempHead
+    NORM: BN
+    WITH_BNNECK: True
+    POOL_LAYER: Identity
+    NECK_FEAT: before
+    CLS_LAYER: CircleSoftmax
+    SCALE: 64
+    MARGIN: 0.3
+
+  LOSSES:
+    NAME: ("CrossEntropyLoss",)
+    CE:
+      EPSILON: 0.1
+      SCALE: 1.0
+    
+    TRI:
+      MARGIN: 0.0
+      HARD_MINING: True
+      NORM_FEAT: False
+      SCALE: 1.0
+
+
+INPUT:
+  SIZE_TRAIN: [ 256, 128 ]
+  SIZE_TEST:  [ 256, 128 ]
+
+  REA:
+    ENABLED: True
+    PROB: 0.5
+
+  FLIP:
+    ENABLED: True
+
+  PADDING:
+    ENABLED: True
+
+DATASETS:
+  NAMES: ("LSVID",)
+  TESTS: ("LSVID",)
+
+DATALOADER:
+  SAMPLER_TRAIN: BalancedIdentitySamplerV2
+  NUM_INSTANCE: 4
+  NUM_WORKERS: 8
+
+SOLVER:
+  AMP:
+    ENABLED: True
+  OPT: SGD
+  MAX_EPOCH: 30
+  BASE_LR: 0.01
+  BIAS_LR_FACTOR: 2.
+  WEIGHT_DECAY: 1e-4
+  WEIGHT_DECAY_BIAS: 1e-4 
+  IMS_PER_BATCH: 16
+
+  SCHED: CosineAnnealingLR
+  ETA_MIN_LR: 0.000016
+
+  WARMUP_FACTOR: 0.01
+  WARMUP_ITERS: 1000
+
+  CLIP_GRADIENTS:
+    ENABLED: True
+
+  CHECKPOINT_PERIOD: 30
+
+TEST:
+  EVAL_PERIOD: 5
+  IMS_PER_BATCH: 16
+
+CUDNN_BENCHMARK: True
+
+TEMP:
+  REDUCE: 'avg'
+  DATA:
+    DENSE: True
+    SAMPLING_STEP: 32
+  TRAIN:
+    SAMPLER: 'TemporalRestrictedBeginCrop'
+    SEQ_SIZE: 8
+    STRIDE: 4
+  TEST:
+    ALL: False
+    SEQ_SIZE: 8
+    TRACK_SPLIT: 128
+
+CASCADE:
+  PATCH1:  (16, 16)
+  STRIDE1: (12, 12)
+
+  PATCH2:  (32, 16)
+  STRIDE2: (28, 12)
+
+  PATCH3:  (16, 32)
+  STRIDE3: (12, 28)
+
+  TPE: flow
+
+
+OUTPUT_DIR: logs/lsvid_lr0.01
